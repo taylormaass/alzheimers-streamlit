@@ -15,7 +15,7 @@ st.header("Dataset Preview")
 st.dataframe(df.head())
 st.header("Age Distribution")
 fig = px.histogram(df, x="Age", nbins=20, title="Age Distribution of Patients")
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True, width="stretch")
 
 # -----------------------
 # DATA PREPARATION
