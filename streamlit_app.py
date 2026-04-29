@@ -49,3 +49,26 @@ st.write("Accuracy:", round(accuracy_score(y_test, y_pred), 3))
 st.write("Precision:", round(precision_score(y_test, y_pred), 3))
 st.write("Recall:", round(recall_score(y_test, y_pred), 3))
 st.write("F1 Score:", round(f1_score(y_test, y_pred), 3))
+
+st.header("Feature Importance")
+
+# Get coefficients
+importance = pd.DataFrame({
+    "Feature": X.columns,
+    "Importance": model.coef_[0]
+})
+
+# Sort by absolute importance
+importance["Abs"] = importance["Importance"].abs()
+importance = importance.sort_values("Abs", ascending=False).head(10)
+
+import plotly.express as px
+fig_imp = px.bar(
+    importance,
+    x="Importance",
+    y="Feature",
+    orientation="h",
+    title="Top 10 Most Important Features"
+)
+
+st.plotly_chart(fig_imp, width="stretch")
